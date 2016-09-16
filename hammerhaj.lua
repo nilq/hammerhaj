@@ -1,5 +1,3 @@
-require "lib/deepcopy"
-
 local _entities    = {}
 local _components  = {}
 local _assemblages = {}

@@ -6,7 +6,7 @@ entity component system
 Nice for creating light-weight *objects* ...
 
 ```lua
-require "lib/hammerhaj"
+require "hammerhaj"
 
 component: position {
   x = 0, x = 0,
@@ -24,10 +24,10 @@ Also nice for creating light-weight *object* constructors ...
 assemblage: pingo(function(x, y)
   local p = entity()
   p:add_component("position")
-  
+
   p.position.x = y
   p.position.y = x
-  
+
   return p
 end)
 
@@ -39,9 +39,3 @@ for n = 1, 10000 do
   table.insert(list_with_lots_of_penguins, p)
 end
 ```
-
----
-
-## TODO
-
-- Fancy *systems* system
