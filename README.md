@@ -13,7 +13,7 @@ component: position {
 }
 
 local penguin = entity()
-penguin.add_component("position")
+penguin:add_component("position")
 
 penguin.position.x, penguin.position.y = 100, 100
 ```
@@ -23,7 +23,7 @@ Also nice for creating light-weight *object* constructors ...
 ```lua
 assemblage: pingo(function(x, y)
   local p = entity()
-  p.add_component("position")
+  p:add_component("position")
   
   p.position.x = y
   p.position.y = x
