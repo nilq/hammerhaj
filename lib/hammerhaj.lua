@@ -1,3 +1,5 @@
+require "lib/deepcopy"
+
 local _entities    = {}
 local _components  = {}
 local _assemblages = {}
@@ -47,7 +49,11 @@ entity = function(k)
     elseif self.components[ck] then
       error("component '" .. ck .. "' has already been added to '" .. k  .. "'!")
     end
-    self.components[ck] = _components[ck]
+    self.components[ck] = table.deepcopy(_components[ck], { function_env = instance }, {
+      ["userdata"] = function(stack, orig, copy, state, arg1, arg2)
+        return orig, true
+      end,
+    })
   end
 
   function ent:remove_component(ck)
@@ -96,14 +102,8 @@ create = setmetatable({}, {
   __call = call_index,
   __index = function(_, k)
     if _assemblages[k] then
-      return function(...)
-        local args = {}
-        for i, v in ipairs({...}) do
-          if i > 1 then
-            args[#args + 1] = v
-          end
-        end
-        return _assemblages[k](args)
+      return function(_, ...)
+        return _assemblages[k](...)
       end
     else
       error("assemblage '" .. k .. "' does not exist!")
