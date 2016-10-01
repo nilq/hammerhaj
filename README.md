@@ -9,7 +9,7 @@ Nice for creating light-weight *objects* ...
 require "hammerhaj"
 
 component: position {
-  x = 0, x = 0,
+  x = 0, y = 0,
 }
 
 local penguin = entity()
@@ -25,17 +25,17 @@ assemblage: pingo(function(x, y)
   local p = entity()
   p:add_component("position")
 
-  p.position.x = y
-  p.position.y = x
+  p.position.x = x,
+  p.position.y = y,
 
   return p
 end)
 
 -- thus easy construction of 'pingo's
-local list_with_lots_of_penguins = {}
+local list_of_10000_pingos = {}
 
 for n = 1, 10000 do
   local p = create: pingo(n, n)
-  table.insert(list_with_lots_of_penguins, p)
+  table.insert(list_of_10000_pingos, p)
 end
 ```
